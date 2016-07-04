@@ -4,9 +4,7 @@ import (
   "github.com/gin-gonic/gin"
   "fmt"
   "strconv"
-//  "github.com/BurntSushi/toml"
   "github.com/parnurzeal/gorequest"
-//  "io/ioutil"
   "io"
   "strings"
   "bufio"
@@ -29,13 +27,6 @@ Filename *string
 Timeout *int
 )
 var succ_ch = make(chan string,10000)
-/*
-type Config struct {
-    Masterid string
-    Timeout int //暂未使用
-    Port string
-}
-*/
 //读取文件，返回行 列表
 func Cat(filename string) []string {
    f,err := os.Open(filename) 
@@ -71,19 +62,16 @@ func accept() {
   status,_ := strconv.ParseBool(c.Query("status")) //判断客户端是否下载成功
   host := c.Query("host")
   src := c.Query("src") //接受客户端返回的数据源
-  //fmt.Println(status,host)
   if status {
       succ_ch <- host
       succ_ch <- src
       SuccList = append(SuccList,host)
-     // fmt.Println(SuccList,FailList)
   } else {
       fmt.Println("客户端下载失败：",host)
       succ_ch <- src
   }
   })
   router.Run(ListenPort)
-  //router.Run(":%s",Conf().Port)
 }
 //request向客户端发送下载任务
 func request(master,port,src,dst,srcpath,dstpath string) {
