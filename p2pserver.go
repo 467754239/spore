@@ -126,8 +126,8 @@ func init() {
         flag.PrintDefaults()
     }
     Filename = flag.String("f", "ip.txt", "File that contains the target machine")
-    Srcpath = flag.String("s", "/home/xiaoju", "Data source path")
-    Dstpath = flag.String("d", "/home/xiaoju", "Data destination path")
+    Srcpath = flag.String("s", "/home/aby", "Data source path")
+    Dstpath = flag.String("d", "/home/aby", "Data destination path")
     Port = flag.String("p", "12306", "Listen port")
     Master = flag.String("m", "", "ip or host name of the master")
     Timeout = flag.Int("t", 1800, "If the master does not receive the return value within the specified time , that the transmission fails")
